@@ -34,4 +34,21 @@ class PostController extends Controller
         Post::create($data);
         return redirect('/posts');
     }
+    public function edit($id){
+        $post = Post::find($id);
+        return view('posts.edit',['post' =>$post]);
+    }
+
+    public function update(Request $request, $id){
+        $post = Post::find($id);
+        $data = [
+            'title' => $request->title,
+            'content'=> $request->content
+        ];
+
+        $post->update($data);
+
+        Post::create($data);
+        return redirect('/posts');
+    }
 }
